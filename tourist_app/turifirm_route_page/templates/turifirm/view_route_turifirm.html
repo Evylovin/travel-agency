@@ -1,0 +1,107 @@
+<!-- Страница профиля пользователя/Стартовая страница-->
+<!-- Подключение шаблона-фундамента для страницы -->
+{% extends 'home/base.html' %}
+{% block title %}
+Информация о маршруте "{{route_info.TurfirimRoute.name_route}}"
+{% endblock %}
+<!-- Отображение информации об авторизованном пользователе -->
+{% block content %}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-left bg-dark" style="color:white">
+    <h1 class="display-4 font-weight-normal" align="center">Информация о маршруте "{{route_info.TurfirimRoute.name_route}}"</h1><br>
+    <br>
+    <br>
+    <div style="width: 200px;">
+    <form method="post">
+        {{ booking.id_route(value=route_info.TurfirimRoute.id_route)}}
+        {{ booking.type_payment.label()}}
+        {{ booking.type_payment(class="form-control")}}
+        <br>
+        {{ booking.submit_book(class="btn btn-lg btn-block btn-light")}}
+        <br>
+    </form>
+    </div>
+    <h4 class="display-6 font-weight-normal" align="center">Основная информация</h4><br>
+    <div class="row bg-dark" style="margin-top:20px; margin-left:20px">
+        <div class="col-12">
+            <table class="table table-hover table-bordered table-dark table-striped">
+                <thead align="center">
+                    <tr>
+                        <th scope="col">Страховые выплаты</th>
+                        <th scope="col">Дата начала</th>
+                        <th scope="col">Длительность</th>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    <tr>
+                        <td>{{route_info.TurfirimRoute.insurance_payments}}</td>
+                        <td>{{route_info.TurfirimRoute.start_date}}</td>
+                        <td>{{route_info.TurfirimRoute.duration}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row bg-dark" style="margin-top:20px; margin-left:20px">
+        <div class="col-12">
+            <table class="table table-hover table-bordered table-dark table-striped">
+                <thead align="center">
+                    <tr>
+                        <th scope="col">Страна посещения</th>
+                        <th scope="col">Город посещения</th>
+                        <th scope="col">Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    <tr>
+                        <td>{{route_info.Country.country_name}}</td>
+                        <td>{{route_info.City.name_city}}</td>
+                        <td>{{route_info.TurfirimRoute.price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row bg-dark"style="margin-top:20px; margin-left:20px">
+        <div class="col-12">
+            <table class="table table-hover table-bordered table-dark table-striped">
+                <thead align="center">
+                    <tr>
+                        <th scope="col">Название отеля</th>
+                        <th scope="col">Рейтинг отеля</th>
+                        <th scope="col">Фото отеля</th>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    <tr>
+                        <td>{{route_info.Hotel.hotel_name}}</td>
+                        <td>{{route_info.Hotel.rate}}</td>
+                        <td><img src="{{ route_info.Hotel.hotel_photo }}" width="400" height="400"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <h4 class="display-6 font-weight-normal" align="center">Дополнительная информация</h4><br>
+    <div class="row bg-dark"style="margin-top:20px; margin-left:20px">
+        <div class="col-12">
+            <table class="table table-hover table-bordered table-dark table-striped">
+                <thead align="center">
+                    <tr>
+                        <th scope="col">Фото номера</th>
+                        <th scope="col">Тип номера</th>
+                        <th scope="col">Количесво мест</th>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    <tr>
+                        <td><img src="{{ route_info.HotelRoom.photo_room }}" width="400" height="400"></td>
+                        <td>{{ route_info.HotelRoom.type_room }}</td>
+                        <td>{{ route_info.HotelRoom.persons_number }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

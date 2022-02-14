@@ -1,0 +1,23 @@
+<!-- Подключение шаблона-фундамента для страницы -->
+{% extends 'home/base.html' %}
+{% block title %}
+Профиль пользователя
+{% endblock %}
+<!-- Отображение информации об авторизованном пользователе -->
+{% block content %}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-left bg-dark" style="color:white">
+    <div align="center">
+        <h1 class="display-4 font-weight-normal" align="center">Профиль пользователя {{ user_info.AppUser.login }}</h1>
+        <br>
+        <p class="lead font-weight-normal">ФИО пользователя: {{ user_info.AppUser.fio }}</p>
+        <p class="lead font-weight-normal">Роль на сайте: {{ user_info.RoleAppUser.name_role_user }}</p>
+        <p class="lead font-weight-normal">Дата рождения: {{ user_info.AppUser.birthday }}</p>
+        <p class="lead font-weight-normal">Номер телефона: {{ user_info.AppUser.phone_number }}</p>
+        <p class="lead font-weight-normal">Адрес: {{ user_info.AppUser.address }}</p>
+        <img src="{{user_info.AppUser.photo_application_user}}" width="300" height="300">
+        <br>
+        <br>
+        <a class="btn btn-lg btn-info" href="{{url_for('profile.profile_update_view')}}">Изменить профиль</a>
+    </div>
+</div>
+{% endblock %}

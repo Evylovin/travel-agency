@@ -1,0 +1,93 @@
+<!-- Стартовая страница сайта -->
+<!-- Подключение шаблона-фундамента для страницы -->
+{% extends 'home/base.html' %}
+{% block title %}
+Стартовая страница
+{% endblock %}
+{% block content %}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-left bg-dark" style="color:white">
+    <h1 class="display-4 font-weight-normal" align="center">Турагенство "К, К и К"</h1>
+    <div class="row bg-dark" style="margin-top:20px; margin-left:20px">
+        <div class="col-12">
+            <h2>Список маршрутов</h2>
+            <br>
+            <table id="routes" class="table table-hover table-bordered table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Название маршрута</th>
+                        <th scope="col">Страна посещения</th>
+                        <th scope="col">Город посещения</th>
+                        <th scope="col">Стоимость</th>
+                        <th scope="col">Дата начала</th>
+                        <th scope="col">Длительность</th>
+                        <th scope="col">Фото отеля</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for route in all_routes %}
+                    <tr>
+                        <td>{{ route.TurfirimRoute.name_route }}</td>
+                        <td>{{ route.Country.country_name }}</td>
+                        <td>{{ route.City.name_city }}</td>
+                        <td>{{ route.TurfirimRoute.price }}</td>
+                        <td>{{ route.TurfirimRoute.start_date }}</td>
+                        <td>{{ route.TurfirimRoute.duration }}</td>
+                        <td><img src="{{ route.Hotel.hotel_photo }}" width="400" height="400"></td>
+                        <td>
+                            <form method="post" action="{{url_for('home.home_page_view')}}">
+                                {{ info_about_route.id_route(value=route.TurfirimRoute.id_route) }}
+                                {{ info_about_route.submit_info(class="btn btn-lg btn-block btn-light") }}
+                             </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Скрипт для динамической таблицы: фильтрация, сортировка-->
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $("#routes").DataTable(
+            {
+                columns: [
+                    { orderable: true, searchable: true },
+                    { orderable: true, searchable: true },
+                    { orderable: true, searchable: true },
+                    { orderable: true, searchable: true },
+                    { orderable: true, searchable: true },
+                    { orderable: true, searchable: true },
+                    { orderable: false, searchable: false },
+                    { orderable: false, searchable: false }
+                ],
+                language: {
+                    "processing": "Подождите...",
+                    "search": "Поиск:",
+                    "lengthMenu": "Показать _MENU_ записей",
+                    "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                    "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                    "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                    "infoPostFix": "",
+                    "loadingRecords": "Загрузка записей...",
+                    "zeroRecords": "Записи отсутствуют.",
+                    "emptyTable": "В таблице отсутствуют данные",
+                    "paginate": {
+                        "first": "Первая",
+                        "previous": "Предыдущая",
+                        "next": "Следующая",
+                        "last": "Последняя"
+                    },
+                    "aria": {
+                        "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                        "sortDescending": ": активировать для сортировки столбца по убыванию"
+                    }
+                }
+            });
+    });
+</script>
+{% endblock %}

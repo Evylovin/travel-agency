@@ -1,0 +1,43 @@
+<!-- Страница профиля пользователя/Стартовая страница-->
+<!-- Подключение шаблона-фундамента для страницы -->
+{% extends 'home/base.html' %}
+{% block title %}
+Изменение профиля
+{% endblock %}
+<!-- Отображение информации об авторизованном пользователе -->
+{% block content %}
+<form method="POST" class="form-addding" style="color:black">
+{{ update_profile_form.hidden_tag() }}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-left bg-dark" style="color:white">
+    <div align="center">
+        <p class="lead font-weight-normal">
+            ФИО работника: {{ activated_user.fio }}<br>
+            {{ update_profile_form.fio.label() }}
+            {{ update_profile_form.fio(class="form-control") }}
+        </p>
+        <p class="lead font-weight-normal">
+            Номер телефона: {{ activated_user.phone_number }}<br>
+            {{ update_profile_form.phone_number.label() }}
+            {{ update_profile_form.phone_number(class="form-control") }}
+        </p>
+        <p class="lead font-weight-normal">
+            Адрес: {{ activated_user.address }}<br>
+            {{ update_profile_form.address.label() }}
+            {{ update_profile_form.address(class="form-control") }}
+        </p>
+        <p class="lead font-weight-normal">
+            Дата рождения: {{ activated_user.birthday }}<br>
+            {{ update_profile_form.birthday.label() }}
+            {{ update_profile_form.birthday(class="form-control") }}
+        </p>
+        <p class="lead font-weight-normal">
+            Фото работника:<br> <img src="{{activated_user.photo_application_user}}" width="300" height="300"> <br>
+            {{ update_profile_form.user_photo.label() }}
+            {{ update_profile_form.user_photo(class="form-control") }}
+        </p>
+        <br>
+            {{ update_profile_form.submit_update(class="btn btn-lg btn-block btn-warning") }}
+    </div>
+</div>
+</form>
+{% endblock %}

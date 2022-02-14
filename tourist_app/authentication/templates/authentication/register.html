@@ -1,0 +1,61 @@
+<!-- Страница регистрации пользователя -->
+<!-- Подключение шаблона-фундамента для страницы -->
+{% extends 'home/base.html' %}
+
+{% block title %}
+Страница регистрации
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal text-center text-dark">
+            Регистрация нового пользователя
+        </h1>
+        <!-- Подключение полей для ввода информации о пользователе при регистрации -->
+        <form method="POST" class="form-register" style="color:black">
+            {{ reg_form.hidden_tag() }}
+
+            {{ reg_form.fio.label() }}
+            {{ reg_form.fio(class="form-control", placeholder="Фамилия Имя Отчество") }}
+
+            {{ reg_form.birthday.label() }}
+            {{ reg_form.birthday(class="form-control", placeholder="Год-Месяц-День") }}
+
+            {{ reg_form.address.label() }}
+            {{ reg_form.address(class="form-control", placeholder="Адрес") }}
+
+            {{ reg_form.phone_number.label() }}
+            {{ reg_form.phone_number(class="form-control", placeholder="Телефон") }}
+
+            {{ reg_form.role.label() }}
+            {{ reg_form.role(class="form-control", placeholder="Роль") }}
+
+            {{ reg_form.user_photo.label() }}
+            {{ reg_form.user_photo(class="form-control") }}
+
+            {{ reg_form.login.label() }}
+            {{ reg_form.login(class="form-control", placeholder="Логин") }}
+
+            {{ reg_form.password1.label() }}
+            {{ reg_form.password1(class="form-control", placeholder="Пароль") }}
+
+            {{ reg_form.password2.label() }}
+            {{ reg_form.password2(class="form-control", placeholder="Подтвердить пароль") }}
+            
+            <br>
+            <div class="checkbox mb-3">
+               <h6>Уже есть аккаунт?</h6>
+               <a class="btn btn-sm btn-secondary" href="{{ url_for('authentication.login_page') }}">Выполнить вход</a>
+            </div>
+            
+            {{ reg_form.submit(class="btn btn-lg btn-block btn-dark") }}
+        
+        </form>
+        
+        <br>
+    
+    </div>
+
+{% endblock %}
